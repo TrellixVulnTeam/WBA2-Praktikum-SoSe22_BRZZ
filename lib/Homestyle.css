@@ -38,6 +38,14 @@ p {
 	border: 3px solid black;
  }
 
+ .column.kategorie {
+	height: auto; 
+	width: 100%;
+	background-color: #bbb;
+	border: 3px solid black;
+	margin-bottom: 20px;
+ }
+
 .footer {
 	background-color: #f1f1f1;
 	padding: 10px;
