@@ -53,9 +53,29 @@ th {
 	width: 100%;
 }
 
+.th_conten_menü {
+	width: auto;
+	padding-left: 50px;
+}
+
 h2 {
 	text-align: center;
 	text-decoration: underline;
+}
+
+.table_top_topics {
+	margin-left: 40px;
+	border: none;
+}
+
+.top_topics {
+	border: 2px solid black;
+	width: 300px;
+}
+
+.choose_menu {
+	border: none;
+	margin: auto;
 }
 
 /*Dropdown Button */
@@ -97,10 +117,12 @@ h2 {
 	display: block;
   }
 
-#box2 {
-    background-color: transparent;
-    width: 120px;
-    height: 120px;
-    border: 2px solid black;
-	border-radius: 100px;
-}
+.button {
+	background-color: #aaa;
+	padding: 30px;
+	display: inline-block;
+	cursor: pointer;
+	border: 2px solid black;
+  }
+
+.button1 {border-radius: 50%;}
