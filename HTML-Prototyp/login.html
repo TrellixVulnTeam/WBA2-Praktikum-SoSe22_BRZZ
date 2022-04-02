@@ -7,17 +7,20 @@
 		<link rel="stylesheet" href="./mw_stylesheet.css">
 	</head>
 	<body>
-		<div name="logo"><img href="./pics/logo.png" alt="logo"></img></div>
+		<div name="logo"><img src="../lib/logo.png" alt="logo"></img></div>
 		<div name="login_main"  class="formpage_main">
 			<h1>Log in</h1>
 			<div name="form" class="form">
 				<form>
 					<input name="e-mail" id="e-mail" type="text" class="text_input" placeholder="E-Mail"></input>
-					<input name="password" id="password" type="text" class="text_input" placeholder="Password"></input>
+					<input name="password" id="password" type="password" class="text_input" placeholder="Password"></input>
 					<input name="submit" id="submit" type="submit" class="submit_button" value="Log in"></input>
 				</form>
 			</div>
-			<div name="buttons"></div>
+			<div name="buttons">
+				<p class="text" style="float: left;">Don't have an Account yet?</p>
+				<a name="signin" id="signin"  class="link_button" value="Sign up" href="./signup.html" style="float: right;">Sign up</a>
+			</div>
 		</div>
 	</body>
 </html>

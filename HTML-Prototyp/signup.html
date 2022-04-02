@@ -7,17 +7,19 @@
 		<link rel="stylesheet" href="./mw_stylesheet.css">
 	</head>
 	<body>
-		<div name="logo"><img href="./pics/logo.png" alt="logo"></img></div>
+		<div name="logo"><img src="../lib/logo.png" alt="logo"></img></div>
 		<div name="signup_main"  class="formpage_main">
 			<h1>Sign up</h1>
 			<p>Welcome to our IT-Security Forum.<br>Please enter your information to create an Account.</p>
 			<div name="form" class="form">
 				<form>
-					<input name="first_name" id="first_name" type="text" class="text_input_half" placeholder="First Name"></input>
-					<input name="last_name" id="last_name" type="text" class="text_input_half" placeholder="Last Name"></input>
+					<div name="name_input" class="name_input">
+					<input name="first_name" id="first_name" type="text" class="text_input_left" placeholder="First Name"></input>
+					<input name="last_name" id="last_name" type="text" class="text_input_right" placeholder="Last Name"></input>
+					</div>
 					<input name="e-mail" id="e-mail" type="text" class="text_input" placeholder="E-Mail"></input>
-					<input name="password" id="password" type="text" class="text_input" placeholder="Password"></input>
-					<input name="submit" id="submit" type="submit" class="submit_button" value="Log in"></input>
+					<input name="password" id="password" type="password" class="text_input" placeholder="Password"></input>
+					<input name="submit" id="submit" type="submit" class="submit_button" value="Sign up"></input>
 				</form>
 			</div>
 			<div name="buttons"></div>

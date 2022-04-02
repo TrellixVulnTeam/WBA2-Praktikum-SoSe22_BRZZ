@@ -1,6 +1,6 @@
 .formpage_main{
     margin: auto;
-    width: 20%;
+    width: 25%;
     text-align: center;
 }
 
@@ -10,20 +10,44 @@
 }
 
 .text_input{
-    width: 100%;
+    float: center;
+    width: 92.5%;
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
 }
 
-.text_input_half{
-    width: 42%;
+.text_input_left{
+    float: left;
+    width: 41%;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.text_input_right{
+    float: right;
+    width: 41%;
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
 }
 
 .submit_button{
+    width: auto;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.link_button {
+    width: auto;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.text{
     width: auto;
     padding: 3%;
     margin-top: 3%;
