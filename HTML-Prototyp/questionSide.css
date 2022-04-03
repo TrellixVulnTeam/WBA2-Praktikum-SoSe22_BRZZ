@@ -100,3 +100,20 @@ button{
     padding: 10px 15px;
     cursor: pointer;
 }
+
+#profil2{
+   margin-left: 77%;
+   border-radius: 40%;
+   margin-top: -28%;
+
+}
+
+.userName{
+    color: black;
+    position: absolute;
+    margin-left: 76.75%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-family: Helvetica, Arial, sans-serif;
+}
