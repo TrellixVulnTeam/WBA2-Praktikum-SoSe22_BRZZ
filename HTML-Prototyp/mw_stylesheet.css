@@ -26,11 +26,12 @@
 }
 
 .text_input_right{
-    float: right;
+    float: left;
     width: 41%;
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
+    margin-left: 3%;
 }
 
 .submit_button{
@@ -54,3 +55,61 @@
     margin-bottom: 3%;
 }
 
+.left_column{
+    float: left;
+    margin: auto;
+    width: 25%;
+    text-align: center;
+}
+
+.center_column{
+    float: left;
+    width: 75%;
+}
+
+.profile{
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    width: 50%;
+}
+
+.profile img{
+    width: 100%;
+}
+
+.profile .text{
+    font-size: large;
+}
+
+.profile .container{
+    height: auto;
+    width: auto;
+    position: relative;
+}
+
+.profile .overlay{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.profile .container:hover .overlay{
+    opacity: 1;
+}
+
+.container .overlay .button{
+    color: black;
+    background-color: white;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
