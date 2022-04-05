@@ -268,6 +268,7 @@ th {
     float: left;
     background-color: white;
     width: 20%;
+    height: auto;
     border-style: solid;
     border-color: darkgray;
     border-radius: 6px;
@@ -280,7 +281,7 @@ th {
 
 .tab_current button{
     font-size: medium;
-    height: 100%;
+    height: auto;
     width: 100%;
     border: none;
     background-color: transparent;
@@ -302,7 +303,7 @@ th {
 
 .tab_other button{
     font-size: medium;
-    height: 100%;
+    height: auto;
     width: 100%;
     border: none;
     background-color: transparent;
