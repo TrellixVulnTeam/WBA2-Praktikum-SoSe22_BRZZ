@@ -147,6 +147,7 @@ th {
 
 /* CSS Mathieu */
 
+/*Signup/Login Forms*/
 .formpage_main{
     margin: auto;
     width: 25%;
@@ -204,6 +205,7 @@ th {
     margin-bottom: 3%;
 }
 
+/*profile layout*/
 .left_column{
     float: left;
     margin: auto;
@@ -232,7 +234,7 @@ th {
 .profile .text{
     font-size: large;
 }
-
+ /*Profile Edit Hover*/
 .profile .container{
     height: auto;
     width: auto;
@@ -264,6 +266,7 @@ th {
     height: 100%;
 }
 
+/*Profile Tabs*/
 .tab_current{
     float: left;
     background-color: white;
