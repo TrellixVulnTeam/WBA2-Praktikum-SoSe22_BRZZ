@@ -139,9 +139,12 @@
     background-color: lightgray;
 }
 
-.tab_current p{
+.tab_current button{
     font-size: medium;
-    margin: 5px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: transparent;
 }
 
 .tab_other{
@@ -158,7 +161,10 @@
     background-color: lightgray;
 }
 
-.tab_other p{
+.tab_other button{
     font-size: medium;
-    margin: 5px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: transparent;
 }
