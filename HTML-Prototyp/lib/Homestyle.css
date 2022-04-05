@@ -1,4 +1,6 @@
 /*Autor: Jonas Reinecke*/
+
+/* Search Button-Header */
 .Search {
 	height: 50px;
 	width: 400px;
@@ -9,6 +11,7 @@
 	border: 3px solid black;
 }
 
+/* Willkommen Text */
 .welcome {
 	margin-top: 30px;
 	text-align: center;
@@ -25,19 +28,22 @@ p {
 	margin-left: 10px;
 }
 
+/* Div-Column Side */
 .column.side {
 	width: 30%;
 	background-color: #aaa;
 	border: 3px solid black;
 	margin-left: 25px;
 }
-  
+
+/* Div-Column Middle */
 .column.middle {
 	width: 65%;
 	background-color: #bbb;
 	border: 3px solid black;
  }
 
+ /* Div-Column Kategorie */
  .column.kategorie {
 	height: auto; 
 	width: 100%;
@@ -46,6 +52,7 @@ p {
 	margin-bottom: 20px;
  }
 
+ /* Footer Startseite */
 .footer {
 	background-color: #f1f1f1;
 	padding: 10px;
@@ -71,16 +78,19 @@ h2 {
 	text-decoration: underline;
 }
 
+/* Top Topics Tabelle */
 .table_top_topics {
 	margin-left: 40px;
 	border: none;
 }
 
+/* Top Topics*/
 .top_topics {
 	border: 2px solid black;
 	width: 300px;
 }
 
+/* Auswahl-Menü Tabelle Startseite */
 .choose_menu {
 	border: none;
 	margin: auto;
