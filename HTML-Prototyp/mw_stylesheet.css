@@ -115,16 +115,6 @@
     height: 100%;
 }
 
-.profile_left{
-    width: 40%;
-    float: left;
-}
-
-.profile_right{
-    width: 60%;
-    float: left;
-}
-
 .tab_current{
     float: left;
     background-color: white;
@@ -167,4 +157,20 @@
     width: 100%;
     border: none;
     background-color: transparent;
+}
+
+.profile_left{
+    width: 40%;
+    float: left;
+}
+
+.profile_right{
+    width: 60%;
+    float: left;
+}
+
+.profile_qa{
+    width: 100%;
+    float: left;
+    text-align: left;
 }
