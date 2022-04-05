@@ -1,5 +1,5 @@
 document.write('\
-<div>\
+<div class="header">\
 <table>\
     <tr>\
         <th class="border">\

@@ -1,0 +1,434 @@
+/* CSS Jonas */
+
+/* Search Button-Header */
+.Search {
+	height: 50px;
+	width: 400px;
+	border: 5px solid #7b7777;
+}
+
+.border {
+	border: 3px solid black;
+}
+
+/* Willkommen Text */
+.welcome {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.column {
+	float: left;
+	height: 300px;
+}
+
+p {
+	font-weight: bold;
+	font-size:larger;
+	margin-left: 10px;
+}
+
+/* Div-Column Side */
+.column.side {
+	width: 30%;
+	background-color: #aaa;
+	border: 3px solid black;
+	margin-left: 25px;
+}
+
+/* Div-Column Middle */
+.column.middle {
+	width: 65%;
+	background-color: #bbb;
+	border: 3px solid black;
+ }
+
+ /* Div-Column Kategorie */
+ .column.kategorie {
+	height: auto; 
+	width: 100%;
+	background-color: #bbb;
+	border: 3px solid black;
+	margin-bottom: 20px;
+ }
+
+ /* Footer Startseite */
+.footer {
+	background-color: #f1f1f1;
+	padding: 10px;
+	text-align: center;
+}
+
+table {
+	border: 5px solid black;
+	margin-bottom: 5px;
+}
+
+th {
+	width: 100%;
+}
+
+.th_conten_menü {
+	width: auto;
+	padding-left: 50px;
+}
+
+.h2_home {
+	text-align: center;
+	text-decoration: underline;
+}
+
+/* Top Topics Tabelle */
+.table_top_topics_home {
+	margin-left: 40px;
+	border: none;
+}
+
+/* Top Topics*/
+.top_topics {
+	border: 2px solid black;
+	width: 300px;
+}
+
+/* Auswahl-Menü Tabelle Startseite */
+.choose_menu {
+	border: none;
+	margin: auto;
+}
+
+/*Dropdown Button */
+.dropbtn {
+	text-align: center;
+	background-color: #bbb;
+	border: 2px solid black;
+	padding: 12px;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size: 20px;
+	cursor: pointer;
+  }
+  
+  /* Dropdown Content */
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: white;
+	min-width: 150px;
+	z-index: 1;
+  }
+  
+  /* Links im Dropdown */
+  .dropdown-content a {
+	text-align: left;
+	color: black;
+	border: 1px solid black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  /* Farbe Dropdown-Links */
+  .dropdown-content a:hover {background-color: #bbb;}
+  
+  /* Dropdown-Menü */
+  .dropdown:hover .dropdown-content {
+	display: block;
+  }
+
+.button {
+	background-color: #aaa;
+	padding: 30px;
+	display: inline-block;
+	cursor: pointer;
+	border: 2px solid black;
+  }
+
+.button1 {border-radius: 50%;}
+
+/* CSS Mathieu */
+
+.formpage_main{
+    margin: auto;
+    width: 25%;
+    text-align: center;
+}
+
+.formpage_main h1{
+    width: auto;
+    font-size: 45px;
+}
+
+.form .text_input{
+    float: center;
+    width: 92.5%;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.form .text_input_left{
+    float: left;
+    width: 41%;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.form .text_input_right{
+    float: left;
+    width: 41%;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: 3%;
+}
+
+.submit_button{
+    width: auto;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.link_button {
+    width: auto;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.text{
+    width: auto;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.left_column{
+    float: left;
+    margin: auto;
+    width: 25%;
+    text-align: center;
+}
+
+.center_column{
+    float: left;
+    width: 75%;
+    margin-top: 100px;
+}
+
+.profile{
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    width: 50%;
+}
+
+.profile img{
+    width: 100%;
+}
+
+.profile .text{
+    font-size: large;
+}
+
+.profile .container{
+    height: auto;
+    width: auto;
+    position: relative;
+}
+
+.profile .overlay{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.profile .container:hover .overlay{
+    opacity: 1;
+}
+
+.container .overlay .button{
+    color: black;
+    background-color: white;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.tab_current{
+    float: left;
+    background-color: white;
+    width: 20%;
+    border-style: solid;
+    border-color: darkgray;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
+.tab_current:hover{
+    background-color: lightgray;
+}
+
+.tab_current button{
+    font-size: medium;
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.tab_other{
+    float: left;
+    background-color: gray;
+    width: 20%;
+    border-style: solid;
+    border-color: darkgray;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
+.tab_other:hover{
+    background-color: lightgray;
+}
+
+.tab_other button{
+    font-size: medium;
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.profile_left{
+    width: 40%;
+    float: left;
+}
+
+.profile_right{
+    width: 60%;
+    float: left;
+}
+
+.profile_qa{
+    width: 100%;
+    float: left;
+    text-align: left;
+}
+
+/* CSS Johannes */
+
+
+/*---- Header -------- */
+
+
+/*---------form ------------ */
+
+
+
+.inputs {
+   color: #000000;
+   width: 30%;
+   border: 2px solid #000000;
+   border-radius: 10px;
+   padding: 15px;
+   margin-left: 30%;
+   margin-top: 20px;
+   font-family: Helvetica, Arial, sans-serif;
+    
+}
+
+.inputs2 {
+    color: #000000;
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 30%;
+    margin-top: 30px;
+    font-family: Helvetica, Arial, sans-serif;
+} 
+
+.inputs3{
+    border: 2px solid #000000;
+    border-radius: 10px;
+    width: 10%;
+    padding: 7px;
+    margin-left: 30%;
+    margin-top: 20px;
+}
+textarea {
+    height: 120px;
+}
+
+section{
+    margin-left: 27%;
+    
+    padding-top: 30px;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    text-decoration: underline;
+
+}
+
+.table_top_topics {
+	margin-left: 30%;
+	border: none;
+    padding-top: 10px;
+    
+}
+
+.table_top_topics{
+    border: 1px solid black;
+    width: 15%;
+    position: absolute;
+    text-align: left;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.table_top_topics th{
+    border:none;
+}
+
+button{
+
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  font-size: 16px;
+  
+  cursor: pointer;
+}
+
+.submitbutton{
+    margin-left: 55%;
+    margin-top: 9%;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#profil2{
+   margin-left: 77%;
+   border-radius: 40%;
+   margin-top: -28%;
+
+}
+
+.userName{
+    color: black;
+    position: absolute;
+    margin-left: 76.75%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
