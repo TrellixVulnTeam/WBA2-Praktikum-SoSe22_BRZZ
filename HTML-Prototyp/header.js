@@ -22,7 +22,7 @@ document.write('\
                     <a href="home.html">Startseite</a>\
                     <a href="questionSide.html">Frage stellen</a>\
                     <a href="kategorie.html">Kategorien</a>\
-                    <a href="login.html">Login in</a>\
+                    <a href="login.html">Log in</a>\
                     <a href="signup.html">Sign up</a>\
                     </div>\
                 </div>\
