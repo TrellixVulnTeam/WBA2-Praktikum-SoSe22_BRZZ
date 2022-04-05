@@ -1,6 +1,6 @@
 .formpage_main{
     margin: auto;
-    width: 20%;
+    width: 25%;
     text-align: center;
 }
 
@@ -10,17 +10,28 @@
 }
 
 .text_input{
-    width: 100%;
+    float: center;
+    width: 92.5%;
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
 }
 
-.text_input_half{
-    width: 42%;
+.text_input_left{
+    float: left;
+    width: 41%;
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
+}
+
+.text_input_right{
+    float: left;
+    width: 41%;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: 3%;
 }
 
 .submit_button{
@@ -28,4 +39,126 @@
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
+}
+
+.link_button {
+    width: auto;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.text{
+    width: auto;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.left_column{
+    float: left;
+    margin: auto;
+    width: 25%;
+    text-align: center;
+}
+
+.center_column{
+    float: left;
+    width: 75%;
+    margin-top: 100px;
+}
+
+.profile{
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    width: 50%;
+}
+
+.profile img{
+    width: 100%;
+}
+
+.profile .text{
+    font-size: large;
+}
+
+.profile .container{
+    height: auto;
+    width: auto;
+    position: relative;
+}
+
+.profile .overlay{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.profile .container:hover .overlay{
+    opacity: 1;
+}
+
+.container .overlay .button{
+    color: black;
+    background-color: white;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.profile_left{
+    width: 40%;
+    float: left;
+}
+
+.profile_right{
+    width: 60%;
+    float: left;
+}
+
+.tab_current{
+    float: left;
+    background-color: white;
+    width: 20%;
+    border-style: solid;
+    border-color: darkgray;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
+.tab_current:hover{
+    background-color: lightgray;
+}
+
+.tab_current p{
+    font-size: medium;
+    margin: 5px;
+}
+
+.tab_other{
+    float: left;
+    background-color: gray;
+    width: 20%;
+    border-style: solid;
+    border-color: darkgray;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
+.tab_other:hover{
+    background-color: lightgray;
+}
+
+.tab_other p{
+    font-size: medium;
+    margin: 5px;
 }
