@@ -52,11 +52,31 @@ p {
 	margin-bottom: 20px;
  }
 
+.column.categorie {
+	width: 30%;
+	background-color: #aaa;
+	border: 3px solid black;
+	margin-left: 25px;
+    margin-bottom: 25px;
+    margin-bottom: 25px;
+}
+
  /* Footer Startseite */
 .footer {
 	background-color: #f1f1f1;
 	padding: 10px;
 	text-align: center;
+    padding-bottom:60px;
+}
+
+.footer_bottom {
+	position:static;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	color: black;
+    background-color: #f1f1f1;
 }
 
 table {
@@ -66,6 +86,11 @@ table {
 
 th {
 	width: 100%;
+}
+
+.categories {
+    width: 100%;
+    border: none;
 }
 
 .th_conten_menü {
@@ -80,7 +105,7 @@ th {
 
 /* Top Topics Tabelle */
 .table_top_topics_home {
-	margin-left: 40px;
+	margin-left: 70px;
 	border: none;
 }
 
@@ -92,6 +117,7 @@ th {
 
 /* Auswahl-Menü Tabelle Startseite */
 .choose_menu {
+    padding-top: 50px;
 	border: none;
 	margin: auto;
 }
