@@ -3,21 +3,21 @@ document.addEventListener("DOMContentLoaded", main);
 function main() {
     console.log("DOMContentLoaded")
     
-    var profile_info_tab = document.getElementById("profile_info");
+    var profile_info_tab = document.getElementById("profile_info_tab");
     profile_info_tab.addEventListener("click", () => {
-        profile_info_tab.className = "tab_current";
-        user_questions_tab.className = "tab_other";
-        user_answers_tab.className = "tab_other";
+        profile_info_tab.className = 'tab_current';
+        user_questions_tab.className = 'tab_other';
+        user_answers_tab.className = 'tab_other';
     });
 
-    var user_questions_tab = document.getElementById("user_questions")
+    var user_questions_tab = document.getElementById("user_questions_tab")
     user_questions_tab.addEventListener("click", () => {
-        profile_info_tab.className = "tab_other";
-        user_questions_tab.className = "tab_current";
-        user_answers_tab.className = "tab_other";
+        profile_info_tab.className = 'tab_other';
+        user_questions_tab.className = 'tab_current';
+        user_answers_tab.className = 'tab_other';
     });
 
-    var user_answers_tab = document.getElementById("user_answers");
+    var user_answers_tab = document.getElementById("user_answers_tab");
     user_answers_tab.addEventListener("click", () => {
         profile_info_tab.className = "tab_other";
         user_questions_tab.className = "tab_other";
