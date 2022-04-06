@@ -8,7 +8,7 @@ document.write('\
         </th>\
         <th class="border">\
             <div>\
-                <input class="search" type="text" placeholder="Suchen">\
+                <input class="search" type="text" placeholder="Search">\
             </div>\
         </th>\
         <th class="border">\
