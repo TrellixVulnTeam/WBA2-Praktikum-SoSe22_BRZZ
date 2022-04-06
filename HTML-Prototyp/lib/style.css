@@ -54,21 +54,35 @@ p {
 }
 
  /* Div-Column Kategorie */
- .column.kategorie {
-	height: auto; 
-	width: 100%;
-	background-color: #bbb;
-	border: 3px solid black;
-	margin-bottom: 20px;
- }
-
 .column.categorie {
 	width: 30%;
 	background-color: #aaa;
 	border: 3px solid black;
 	margin-left: 25px;
     margin-bottom: 25px;
-    margin-bottom: 25px;
+}
+
+.h2_categorie {
+    text-align: center;
+    text-decoration: underline;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.h3_categorie {
+    text-align: center;
+}
+
+.p_categorie {
+    text-align: center;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
  /* Footer Startseite */
