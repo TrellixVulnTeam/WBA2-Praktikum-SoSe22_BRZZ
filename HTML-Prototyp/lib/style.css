@@ -129,6 +129,12 @@ th {
 	width: 300px;
 }
 
+.button_top_topics {
+    background-color: #aaa;
+    font-weight: bold;
+    border: none;
+}
+
 /* Auswahl-Menü Tabelle Startseite */
 .choose_menu {
     padding-top: 50px;
