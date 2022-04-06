@@ -3,7 +3,7 @@ document.write('\
 <table>\
     <tr>\
         <th class="border">\
-            <img id="Logo" src="./lib/logo2.png" align="left">\
+            <a href="./home.html"><img id="Logo" src="./lib/logo2.png" align="left"></a>\
             <h1 class="welcome">Welcome!</h1>\
         </th>\
         <th class="border">\
