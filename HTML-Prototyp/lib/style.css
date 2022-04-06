@@ -308,7 +308,11 @@ th {
     background-color: lightgray;
 }
 
-.tab_current button{
+.tab_current p:hover{
+    background-color: transparent;
+}
+
+.tab_current p{
     font-size: medium;
     height: auto;
     width: 100%;
@@ -330,7 +334,11 @@ th {
     background-color: lightgray;
 }
 
-.tab_other button{
+.tab_other p:hover{
+    background-color: transparent;
+}
+
+.tab_other p{
     font-size: medium;
     height: auto;
     width: 100%;
