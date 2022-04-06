@@ -76,11 +76,10 @@ p {
 	background-color: #f1f1f1;
 	padding: 10px;
 	text-align: center;
-    padding-bottom:60px;
 }
 
 .footer_bottom {
-	position:static;
+    position:static;
 	bottom: 0;
 	left: 0;
 	width: 100%;
@@ -137,7 +136,7 @@ th {
 
 /* Auswahl-Menü Tabelle Startseite */
 .choose_menu {
-    padding-top: 50px;
+    padding-top: 20px;
 	border: none;
 	margin: auto;
 }
