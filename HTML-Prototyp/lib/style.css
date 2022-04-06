@@ -43,6 +43,14 @@ p {
 	border: 3px solid black;
  }
 
+.column.middle.help {
+    width: 90%;
+    background-color: #bbb;
+	border: 3px solid black;
+    padding-left: 20px;
+    margin-left: 60px;
+}
+
  /* Div-Column Kategorie */
  .column.kategorie {
 	height: auto; 
