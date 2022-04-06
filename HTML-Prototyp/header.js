@@ -3,13 +3,8 @@ document.write('\
 <table>\
     <tr>\
         <th class="border">\
-<<<<<<< HEAD
             <img id="Logo" src="./lib/logo2.png" align="left">\
             <h1 class="welcome">Welcome!</h1>\
-=======
-            <a href="home.html"><img id="Logo" src="./lib/logo2.png" align="left"></a>\
-            <h1 class="welcome">Herzlich Wilkommen!</h1>\
->>>>>>> 5e3bc2eaf2955b0edd000cf9943162223681075d
         </th>\
         <th class="border">\
             <div>\
