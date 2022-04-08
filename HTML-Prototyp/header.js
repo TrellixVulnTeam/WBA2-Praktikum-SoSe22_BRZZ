@@ -1,6 +1,6 @@
 document.write('\
 <div class="header">\
-<table>\
+<table class ="table_header">\
     <tr>\
         <th class="border">\
             <a href="./home.html"><img id="Logo" src="./lib/logo2.png" align="left" alt="Logo"></a>\
