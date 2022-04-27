@@ -2,6 +2,7 @@ const express = require('express');
 const { path } = require('express/lib/application');
 var router = express.Router();
 const app = express();
+var db = require('../database')
 
 app.use(express.static('public'));
 
