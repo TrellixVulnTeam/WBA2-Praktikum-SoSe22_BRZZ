@@ -14,4 +14,18 @@ app.use(express.static('public'));
   //res.sendFile(__dirname + '/html/lib/style.css');
 //});
 
+router.post("/test", (req, res) => {
+  let jsonData = req.body;
+  var sql = "insert into test VALUES ('" + jsonData.id + "', '" + jsonData.id + "');"
+  console.log(sql);
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({"error":err.message});
+      return;
+    }
+    res.send(200);
+  });
+});
+
 module.exports = router;
