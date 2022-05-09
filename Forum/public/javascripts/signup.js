@@ -1,6 +1,6 @@
 first_name_input = document.getElementById("first_name");
-last_name = document.getElementById("last_name");
-email = document.getElementById("email");
+last_name_input = document.getElementById("last_name");
+email_input = document.getElementById("e-mail");
 username_input = document.getElementById("username");
 password_input = document.getElementById("password");
 password_repeat_input = document.getElementById("repeat_password");
@@ -8,12 +8,15 @@ submitbutton = document.getElementById("submit");
 
 submitbutton.addEventListener("click", sendForm);
 //submitbutton.addEventListener("click", checkFormular);
-
 function sendForm() {
-    text = first_name_input.value
-
+    //checkFormular();
     if (password_input.value === password_repeat_input.value && checkFormular()) {
+        first_name = first_name_input.value;
+        last_name = last_name_input.value;
+        email = email_input.value;
+        username = username_input.value;
         password = password_input.value;
+
         data = {
             "first_name": first_name,
             "last_name": last_name,
@@ -22,10 +25,9 @@ function sendForm() {
             "password": password,
             "repeat_password": repeat_password,
             "submit": submitbutton
-
         }
 
-        fetch("http://localhost:3000/test", {
+        fetch("http://localhost:3000/new_user", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -45,7 +47,7 @@ function checkFormular() {
 
     first_name = document.getElementById("first_name");
     last_name = document.getElementById("last_name");
-    email = document.getElementById("email");
+    email = document.getElementById("e-mail");
     username = document.getElementById("username");
     password = document.getElementById("password");
     repeat_password = document.getElementById("repeat_password");

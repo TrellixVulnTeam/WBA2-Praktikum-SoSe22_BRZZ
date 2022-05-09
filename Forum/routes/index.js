@@ -1,6 +1,7 @@
 const express = require('express');
 const { path } = require('express/lib/application');
 const bcrypt = require('bcrypt');
+const { nanoid } = require('nanoid');
 var router = express.Router();
 const app = express();
 var db = require('../database');
@@ -16,9 +17,11 @@ app.use(express.static('public'));
 //res.sendFile(__dirname + '/html/lib/style.css');
 //});
 
-router.post("/test", (req, res) => {
-
+router.post("/new_user", (req, res) => {
   let jsonData = req.body;
+  let new_id = nanoid();
+  let new_join_date = new Date().toISOString().slice(0, 10);
+  let profilepicturepath = "/default";
   /*
   bcrypt.genSalt(2, function (err, salt) {
     bcrypt.hash(jsonData.password, salt, function (err, hash) {
@@ -26,15 +29,14 @@ router.post("/test", (req, res) => {
     });
   });
   */
-  var sql = "insert into test (first_name, last_name, email, username, password, repeat_password, submit ) VALUES ('" + jsonData.first_name + "', '" + jsonData.last_name + "','" + jsonData.email + "','" + jsonData.username + "','" + jsonData.password + "','" + jsonData.repeat_password + "','" + jsonData.submit +"');"
-  console.log(sql);
+  var sql = "insert into users (id, firstname, lastname, email, username, passwordhash, joindate, profilepicturepath ) VALUES ('" + new_id + "', '" + jsonData.first_name + "', '" + jsonData.last_name + "','" + jsonData.email + "','" + jsonData.username + "','" + jsonData.password + "','" + new_join_date + "','" + profilepicturepath + "');"
   var params = [];
   db.all(sql, params, (err, rows) => {
     if (err) {
       res.status(400).json({ "error": err.message });
       return;
     }
-    res.send(200);
+    res.sendStatus(200);
   });
 });
 
