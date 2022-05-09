@@ -26,7 +26,7 @@ router.post("/test", (req, res) => {
     });
   });
   */
-  var sql = "insert into test (id, password) VALUES ('" + jsonData.id + "', '" + jsonData.password + "');"
+  var sql = "insert into test (first_name, last_name, email, username, password, repeat_password, submit ) VALUES ('" + jsonData.first_name + "', '" + jsonData.last_name + "','" + jsonData.email + "','" + jsonData.username + "','" + jsonData.password + "','" + jsonData.repeat_password + "','" + jsonData.submit +"');"
   console.log(sql);
   var params = [];
   db.all(sql, params, (err, rows) => {

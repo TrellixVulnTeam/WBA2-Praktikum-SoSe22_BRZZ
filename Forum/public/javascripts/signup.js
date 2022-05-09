@@ -1,4 +1,7 @@
 first_name_input = document.getElementById("first_name");
+last_name = document.getElementById("last_name");
+email = document.getElementById("email");
+username_input = document.getElementById("username");
 password_input = document.getElementById("password");
 password_repeat_input = document.getElementById("repeat_password");
 submitbutton = document.getElementById("submit");
@@ -12,8 +15,14 @@ function sendForm() {
     if (password_input.value === password_repeat_input.value && checkFormular()) {
         password = password_input.value;
         data = {
-            "id": text,
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+            "username": username,
             "password": password,
+            "repeat_password": repeat_password,
+            "submit": submitbutton
+
         }
 
         fetch("http://localhost:3000/test", {
@@ -36,7 +45,7 @@ function checkFormular() {
 
     first_name = document.getElementById("first_name");
     last_name = document.getElementById("last_name");
-    email = document.getElementById("e-mail");
+    email = document.getElementById("email");
     username = document.getElementById("username");
     password = document.getElementById("password");
     repeat_password = document.getElementById("repeat_password");
