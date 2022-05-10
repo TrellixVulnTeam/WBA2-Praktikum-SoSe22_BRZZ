@@ -33,11 +33,11 @@ function sendForm() {
             body: JSON.stringify(data)
         })
 
+        window.location.href = "/login.html"
     }
     if (password_input.value != password_repeat_input.value) {
         window.alert("Passwords are not the same!");
     }
-
 }
 
 function checkFormular() {
