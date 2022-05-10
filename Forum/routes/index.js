@@ -38,4 +38,38 @@ router.post("/new_user", async (req, res) => {
   });
 });
 
+router.get("/new_session", async (req, res) => {
+  let jsonData = req.body;
+  let user = jsonData.username;
+  let password = jsonData.password;
+
+  var sql = "SELECT * FROM users WHERE username = '" + user + "';"
+  var params = [];
+  db.all(sql, params, async (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    if (await bcrypt.compare(password, rows[0].passwordhash)) {
+      let new_session_id = nanoid();
+      let new_user_id = rows[0].id;
+      let new_start_time = Date.now()
+      let new_end_time = new_start_time + 120000
+      var sql = "INSERT INTO usersessions (id, userId, startTime, endTime) VALUES ('" + new_session_id + "', '" + new_user_id + "', '" + new_start_time + "', '" + new_end_time + "');"
+      var params = [];
+      db.all(sql, params, (err, new_rows) => {
+        output = {
+          "sessionid": new_session_id,
+          "startTime": new_start_time,
+          "endTime": new_end_time
+        };
+        res.send(output);
+      });
+    }
+    else{
+      res.sendStatus(400);
+    }
+  });
+});
+
 module.exports = router;
