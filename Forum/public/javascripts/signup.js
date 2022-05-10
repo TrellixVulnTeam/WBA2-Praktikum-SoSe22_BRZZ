@@ -53,24 +53,24 @@ function checkFormular() {
     repeat_password = document.getElementById("repeat_password");
 
     if (first_name.value == "") {
-        //first_name.style.borderColor = "red";
-        window.alert("First name is empty!");
+        first_name.style.borderColor = "red";
+        //window.alert("First name is empty!");
         checkBox = false;
     }
     else {
         first_name.style.borderColor = "white";
     }
     if (last_name.value.length == 0) {
-        //last_name.style.borderColor = "red";
-        window.alert("Last name is empty!");
+        last_name.style.borderColor = "red";
+        //window.alert("Last name is empty!");
         checkBox = false;
     }
     else {
         last_name.style.borderColor = "white";
     }
     if (email.value.length == 0) {
-        //email.style.borderColor = "red";
-        window.alert("E-Mail is empty!");
+        email.style.borderColor = "red";
+        //window.alert("E-Mail is empty!");
         checkBox = false;
     }
     else {
@@ -78,8 +78,8 @@ function checkFormular() {
     }
 
     if (username.value.length == 0) {
-        //username.style.borderColor = "red";
-        window.alert("User name is empty!");
+        username.style.borderColor = "red";
+        //window.alert("User name is empty!");
         checkBox = false;
     }
     else {
@@ -87,8 +87,8 @@ function checkFormular() {
     }
 
     if (password.value.length == 0) {
-        //password.style.borderColor = "red";
-        window.alert("Password is empty!");
+        password.style.borderColor = "red";
+        //window.alert("Password is empty!");
         checkBox = false;
     }
     else {
@@ -96,8 +96,8 @@ function checkFormular() {
     }
 
     if (repeat_password.value.length == 0) {
-        //repeat_password.style.borderColor = "red";
-        window.alert("Repeat Password is empty!");
+        repeat_password.style.borderColor = "red";
+        //window.alert("Repeat Password is empty!");
         checkBox = false;
     }
     else {
