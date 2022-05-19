@@ -38,7 +38,7 @@ router.post("/new_user", async (req, res) => {
   });
 });
 
-router.get("/new_session", async (req, res) => {
+router.post("/new_session", async (req, res) => {
   let jsonData = req.body;
   let user = jsonData.username;
   let password = jsonData.password;
@@ -61,13 +61,15 @@ router.get("/new_session", async (req, res) => {
         output = {
           "sessionid": new_session_id,
           "startTime": new_start_time,
-          "endTime": new_end_time
+          "endTime": new_end_time,
+          "status": true
         };
         res.send(output);
       });
     }
     else{
-      res.sendStatus(400);
+      res.status(400).json({"status": false});
+      res.send;
     }
   });
 });
