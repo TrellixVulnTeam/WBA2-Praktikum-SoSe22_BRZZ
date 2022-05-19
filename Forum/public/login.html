@@ -1,29 +1,32 @@
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Log in</title>
-		<link rel="stylesheet" href="lib/style.css">
-	</head>
 
-	<header>
-		<script src="header.js"></script>
-	</header>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Log in</title>
+	<link rel="stylesheet" href="lib/style.css">
+</head>
 
-	<body>
-		<div name="login_main"  class="formpage_main">
-			<h1>Log in</h1>
-			<div name="form" class="form">
-				<form>
-					<input name="e-mail" id="e-mail" type="text" class="text_input" placeholder="E-Mail"></input>
-					<input name="password" id="password" type="password" class="text_input" placeholder="Password"></input>
-					<input name="submit" id="submit" type="submit" class="submit_button" value="Log in"></input>
-				</form>
-			</div>
-			<div name="buttons">
-				<p class="text" style="float: left;">Don't have an Account yet?</p>
-				<a name="signin" id="signin"  class="link_button" value="Sign up" href="./signup.html" style="float: right;">Sign up</a>
-			</div>
+<header>
+	<script src="header.js"></script>
+</header>
+
+<body>
+	<div name="login_main" class="formpage_main">
+		<h1>Log in</h1>
+		<div name="form" class="form">
+			<form>
+				<input name="user" id="user" type="text" class="text_input" placeholder="Username"></input>
+				<input name="password" id="password" type="password" class="text_input" placeholder="Password"></input>
+				<input name="submit" id="submit" type="submit" class="submit_button" value="Log in"></input>
+			</form>
 		</div>
-	</body>
+		<div name="buttons">
+			<p class="text" style="float: left;">Don't have an Account yet?</p>
+			<a name="signin" id="signin" class="link_button" value="Sign up" href="./signup.html"
+				style="float: right;">Sign up</a>
+		</div>
+	</div>
+</body>
+<script src="./javascripts/login.js"></script>
 </html>
