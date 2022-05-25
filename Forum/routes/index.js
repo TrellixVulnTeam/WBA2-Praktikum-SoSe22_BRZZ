@@ -64,11 +64,11 @@ router.post("/new_session", async (req, res) => {
           "endTime": new_end_time,
           "status": true
         };
-        res.send(output);
+        res.status(200).json(output);
       });
     }
     else{
-      res.status(400).json({"status": false});
+      res.status(200).json({"status": false});
       res.send;
     }
   });
