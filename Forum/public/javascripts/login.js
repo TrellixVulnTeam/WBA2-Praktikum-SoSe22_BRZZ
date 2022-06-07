@@ -1,10 +1,7 @@
-//const { response } = require("express");
-
 user_name_input = document.getElementById("user");
 password_input = document.getElementById("password");
 submitbutton = document.getElementById("submit");
 
-//submitbutton.submitbutton.addEventListener("click", sendForm);
 submitbutton.addEventListener("click", sendForm);
 
 async function sendForm() {

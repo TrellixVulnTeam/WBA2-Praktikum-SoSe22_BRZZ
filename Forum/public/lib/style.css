@@ -410,8 +410,6 @@ th {
 
 /*---------form ------------ */
 
-
-
 .inputs {
    color: #000000;
    width: 30%;
@@ -459,7 +457,6 @@ section{
 
 .table_top_topics {
 	margin-left: 30%;
-	border: none;
     padding-top: 10px;
     
 }
@@ -470,7 +467,6 @@ section{
     position: absolute;
     text-align: left;
     padding-left: 5px;
-    padding-bottom: 5px;
 }
 
 .table_top_topics th{
