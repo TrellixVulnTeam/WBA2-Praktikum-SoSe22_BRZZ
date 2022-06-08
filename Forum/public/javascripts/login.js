@@ -21,14 +21,15 @@ async function sendForm() {
 
     res = await res.json();
 
-    if (res.status) {
+    if (res.status == "correct") {
         cookie_str = "sessionid=" + res.sessionid + "; expires=" + Date(res.endTime) + "; path=/";
-        console.log(cookie_str)
         document.cookie = cookie_str;
         window.location.href = "/index.html"
     }   
-    else {
-        console.log("Status False");
+    else if(res.status == "pwwrong"){
         window.alert("Password wrong!");
+    }
+    else if(res.status == "usrwrong"){
+        window.alert("Username doesn't exist!")
     }
 }

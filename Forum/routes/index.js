@@ -8,8 +8,12 @@ var db = require('../database');
 const { json } = require('express/lib/response');
 const { hash } = require('bcrypt');
 const req = require('express/lib/request');
+const cookieParser = require("cookie-parser");
+>>>>>>> c940447cb2187b5d0c1888a8e3df71941c7cc876
 
 app.use(express.static('public'));
+
+app.use(cookieParser());
 
 //router.get('/', function(req, res, next) {
 
@@ -18,6 +22,25 @@ app.use(express.static('public'));
 //res.sendFile(__dirname + '/html/header.js')
 //res.sendFile(__dirname + '/html/lib/style.css');
 //});
+
+router.use((req, res, next) => {
+  console.log(req.cookies)
+  if (req.cookies.sessionid){
+    var user = ""
+    var sql = "SELECT * FROM usersessions WHERE id = '" + req.cookies.sessionid + "';"
+    var params = [];
+    db.all(sql, params, (err, rows) => {
+      if (err) {
+        res.status(400).json({ "error": err.message });
+        return;
+      }
+      if (rows.length == 0){
+
+      }
+    });
+  }
+  next()
+});
 
 router.post("/new_user", async (req, res) => {
   let jsonData = req.body;
@@ -51,6 +74,11 @@ router.post("/new_session", async (req, res) => {
       res.status(400).json({ "error": err.message });
       return;
     }
+    if (rows.length == 0){
+      res.status(200).json({"status":"usrwrong"});
+      res.send;
+      return;
+    }
     if (await bcrypt.compare(password, rows[0].passwordhash)) {
       let new_session_id = nanoid();
       let new_user_id = rows[0].id;
@@ -63,13 +91,13 @@ router.post("/new_session", async (req, res) => {
           "sessionid": new_session_id,
           "startTime": new_start_time,
           "endTime": new_end_time,
-          "status": true
+          "status": "correct"
         };
         res.status(200).json(output);
       });
     }
-    else {
-      res.status(200).json({ "status": false });
+    else{
+      res.status(200).json({"status": "pwwrong"});
       res.send;
     }
   });
