@@ -2,13 +2,14 @@ const express = require('express');
 const { path } = require('express/lib/application');
 const bcrypt = require('bcrypt');
 const { nanoid } = require('nanoid');
-//var router = express.Router();
+var router = express.Router();
 const app = module.exports = express();
 var db = require('../database');
 const { json } = require('express/lib/response');
 const { hash } = require('bcrypt');
 const req = require('express/lib/request');
 const cookieParser = require("cookie-parser");
+var pathFunc = require('path');
 
 app.use(express.static('public'));
 
@@ -45,13 +46,17 @@ app.use("/", (req, res, next) => {
       next()
     });
   }
+  else{
+    req.body.sessionUserId = "0"
+    next()
+  }
 });
 
 app.post("/new_user", async (req, res) => {
   let jsonData = req.body;
   let new_id = nanoid();
   let new_join_date = new Date().toISOString().slice(0, 10);
-  let profilepicturepath = "/default";
+  let profilepicturepath = "/default.png";
 
   const salt = await bcrypt.genSalt(2);
   const hashed_password = await bcrypt.hash(jsonData.password, salt);
@@ -166,3 +171,22 @@ app.post("/dislike", (req, res) => {
     res.sendStatus(200);
   });
 });
+
+app.get("/profilePicture", (req, res) => {
+  let jsonData = req.body;
+  let id = jsonData.sessionUserId;
+  var sql = "SELECT * FROM users WHERE id = '" + id + "';";
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if(err) {
+      res.status(400).json({"error": err.message});
+      return;
+    }
+    else if (rows.length == 0){
+      res.sendFile(pathFunc.join(__dirname, '../public',"lib/profilePictures/default.png"))
+    }
+    else {
+      res.sendFile(pathFunc.join(__dirname, '../public',"lib/profilePictures" + rows[0].profilepicturepath))
+    }
+  })
+})
