@@ -12,7 +12,7 @@ document.write('\
             </div>\
         </th>\
         <th class="border">\
-            <a href="profile.html"><img id="Profil" src="http://localhost:3000/profilePicture" alt="Profil" style="height:100px;"></a>\
+            <a href="profile.html"><img id="Profil" src="/profilePicture" alt="Profil" style="height:100px;"></a>\
         </th>\
         <th class="border">\
             <nav>\

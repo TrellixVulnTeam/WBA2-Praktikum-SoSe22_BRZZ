@@ -1,7 +1,25 @@
 document.addEventListener("DOMContentLoaded", main);
 
-function main() {
-    console.log("DOMContentLoaded")
+async function getUserName(){
+    let res = await fetch("/username", {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
+    });
+    res = await res.json()
+    return res.username
+}
+
+function updateProfilePicture(){
+    let newProfilePic = document.getElementById("newProfilePic").files[0];
+    let formData = new FormData();
+        
+    formData.append("photo", newProfilePic);
+    fetch('/profilePicture', {method: "POST", body: formData});
+}
+
+async function main() {
+    document.getElementById("username").innerHTML = await getUserName();
+    document.getElementById("sendPictureButton").addEventListener("click", updateProfilePicture)
     
     var tab_body = document.getElementById("tab_body");
 

@@ -11,13 +11,21 @@
         <div name="left_column" class="left_column">
             <div class="profile">
                 <div class="container">
-                    <img src="http://localhost:3000/profilePicture">
+                    <img src="/profilePicture">
                     <div class="overlay">
-                        <div class="button">Change Image</div>
+                        <form method="POST" action="/profilePicture" enctype="multipart/form-data">
+                            <div>
+                                <label>Select your profile picture:</label>
+                                <input type="file" name="profile_pic" />
+                            </div>
+                            <div>
+                                <input type="submit" name="btn_upload_profile_pic" value="Upload" />
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text">user_1234</div>
+                    <div id="username" class="text">username</div>
                     <div class="overlay">
                         <div class="button">Change Username</div>
                     </div>

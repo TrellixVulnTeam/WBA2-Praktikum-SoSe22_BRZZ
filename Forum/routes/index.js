@@ -9,6 +9,7 @@ const { json } = require('express/lib/response');
 const { hash } = require('bcrypt');
 const req = require('express/lib/request');
 const cookieParser = require("cookie-parser");
+const multer = require('multer');
 var pathFunc = require('path');
 
 app.use(express.static('public'));
@@ -17,7 +18,7 @@ app.use(cookieParser());
 
 app.use("/", (req, res, next) => {
   sessionId = req.cookies.sessionid
-  if (sessionId){
+  if (sessionId) {
     var sql = "SELECT * FROM usersessions WHERE id = '" + req.cookies.sessionid + "';"
     var params = [];
     db.all(sql, params, (err, rows) => {
@@ -25,19 +26,19 @@ app.use("/", (req, res, next) => {
         res.status(400).json({ "error": err.message });
         return;
       }
-      if (rows.length == 0){
+      if (rows.length == 0) {
         userid = "0"
       }
       else {
-        if (parseInt(rows[0].endTime) < Date.now()){
+        if (parseInt(rows[0].endTime) < Date.now()) {
           console.log(String(sessionId) + " - Session already ended")
           userid = "0"
         }
-        else if (parseInt(rows[0].startTime) > Date.now()){
+        else if (parseInt(rows[0].startTime) > Date.now()) {
           console.log(String(sessionId) + " - Session hasn't started yet")
           userid = "0"
         }
-        else{
+        else {
           console.log(String(sessionId) + " - Valid Session")
           userid = rows[0].userId
         }
@@ -46,7 +47,7 @@ app.use("/", (req, res, next) => {
       next()
     });
   }
-  else{
+  else {
     req.body.sessionUserId = "0"
     next()
   }
@@ -84,8 +85,8 @@ app.post("/new_session", async (req, res) => {
       res.status(400).json({ "error": err.message });
       return;
     }
-    if (rows.length == 0){
-      res.status(200).json({"status":"usrwrong"});
+    if (rows.length == 0) {
+      res.status(200).json({ "status": "usrwrong" });
       res.send;
       return;
     }
@@ -106,8 +107,8 @@ app.post("/new_session", async (req, res) => {
         res.status(200).json(output);
       });
     }
-    else{
-      res.status(200).json({"status": "pwwrong"});
+    else {
+      res.status(200).json({ "status": "pwwrong" });
       res.send;
     }
   });
@@ -151,8 +152,8 @@ app.post("/like", (req, res) => {
   var sql = "UPDATE questions SET upvotes=upvotes+1 WHERE id = '" + jsonData.id + "';"
   var params = [];
   db.all(sql, params, (err, rows) => {
-    if(err) {
-      res.status(400).json({"error": err.message});
+    if (err) {
+      res.status(400).json({ "error": err.message });
       return;
     }
     res.sendStatus(200);
@@ -162,10 +163,10 @@ app.post("/like", (req, res) => {
 app.post("/dislike", (req, res) => {
   let jsonData = req.body;
   var sql = "UPDATE questions SET downvotes=downvotes+1 WHERE id = '" + jsonData.id + "';"
-  var params =[];
+  var params = [];
   db.all(sql, params, (err, rows) => {
-    if(err) {
-      res.status(400).json({"error": err.message});
+    if (err) {
+      res.status(400).json({ "error": err.message });
       return;
     }
     res.sendStatus(200);
@@ -178,15 +179,101 @@ app.get("/profilePicture", (req, res) => {
   var sql = "SELECT * FROM users WHERE id = '" + id + "';";
   var params = [];
   db.all(sql, params, (err, rows) => {
-    if(err) {
-      res.status(400).json({"error": err.message});
+    if (err) {
+      res.status(400).json({ "error": err.message });
       return;
     }
-    else if (rows.length == 0){
-      res.sendFile(pathFunc.join(__dirname, '../public',"lib/profilePictures/default.png"))
+    else if (rows.length == 0) {
+      res.sendFile(pathFunc.join(__dirname, '../public', "lib/profilePictures/default.png"))
     }
     else {
-      res.sendFile(pathFunc.join(__dirname, '../public',"lib/profilePictures" + rows[0].profilepicturepath))
+      res.sendFile(pathFunc.join(__dirname, '../public', "lib/profilePictures" + rows[0].profilepicturepath))
     }
-  })
-})
+  });
+});
+
+app.post("/profilePicture", async function (req, res) {
+  let jsonData = req.body;
+  let id = jsonData.sessionUserId;
+
+  var sql = "SELECT * FROM users WHERE id = '" + id + "';";
+  var params = [];
+  db.all(sql, params, async function (err, rows) {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    else if (rows.length == 0) {
+      res.sendStatus(400);
+      return;
+    }
+    else {
+      newName = Date.now() + "-" + nanoid() + ".jpg"
+      const storage = multer.diskStorage({
+        destination: function(req, file, cb) {
+          cb(null, 'public/lib/profilePictures');
+        },
+        filename: function(req, file, cb) {
+          cb(null, newName);
+        }
+      });
+
+      const imageFilter = function(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+          req.fileValidationError = 'Only image files are allowed!';
+          return cb(new Error('Only image files are allowed!'), false);
+        }
+        cb(null, true);
+      };
+
+      let upload = multer({ storage: storage, fileFilter: imageFilter }).single('profile_pic');
+
+      upload(req, res, function(err) {
+        if (req.fileValidationError) {
+          return res.send(req.fileValidationError);
+        }
+        else if (!req.file) {
+          return res.send('Please select an image to upload');
+        }
+        else if (err instanceof multer.MulterError) {
+          return res.send(err);
+        }
+        else if (err) {
+          return res.send(err);
+        }
+      })
+
+      var sql = "UPDATE users SET profilepicturepath = '/" + newName + "' WHERE id = '" + id + "';"
+      var params = [];
+      db.all(sql, params, (err, rows) => {
+        if (err){
+          res.sendStatus(400);
+        }
+        else{
+          res.send("<script>window.location.href = '/profile.html';</script>")
+        }
+      });
+    }
+  });
+});
+
+app.get("/username", (req, res) => {
+  let jsonData = req.body;
+  let id = jsonData.sessionUserId;
+  var sql = "SELECT * FROM users WHERE id = '" + id + "';";
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.sendStatus(400)
+      return;
+    }
+    else if (rows.length == 0) {
+      res.sendStatus(400)
+      return;
+    }
+    else {
+      output = { username: rows[0].username }
+      res.send(JSON.stringify(output));
+    }
+  });
+});
