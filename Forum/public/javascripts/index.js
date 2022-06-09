@@ -1,0 +1,1 @@
+python_button = document.getElementById("topic_python");
