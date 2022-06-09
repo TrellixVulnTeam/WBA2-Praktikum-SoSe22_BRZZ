@@ -53,6 +53,17 @@ app.use("/", (req, res, next) => {
   }
 });
 
+app.get("/isLoggedIn", (req, res) => {
+  if (req.body.sessionUserId == "0"){
+    resJSON = {loggedin: "false"}
+    res.send(resJSON)
+  }
+  else {
+    resJSON = {loggedin: "true", userid: req.body.sessionUserId}
+    res.send(resJSON)
+  }
+})
+
 app.post("/new_user", async (req, res) => {
   let jsonData = req.body;
   let new_id = nanoid();
@@ -94,7 +105,7 @@ app.post("/new_session", async (req, res) => {
       let new_session_id = nanoid();
       let new_user_id = rows[0].id;
       let new_start_time = Date.now()
-      let new_end_time = new_start_time + 1200000
+      let new_end_time = new_start_time + (60 * 60 * 1000)
       var sql = "INSERT INTO usersessions (id, userId, startTime, endTime) VALUES ('" + new_session_id + "', '" + new_user_id + "', '" + new_start_time + "', '" + new_end_time + "');"
       var params = [];
       db.all(sql, params, (err, new_rows) => {
@@ -113,6 +124,20 @@ app.post("/new_session", async (req, res) => {
     }
   });
 });
+
+app.get("/logout", (req, res) => {
+  let userid = req.body.sessionUserId;
+  var sql = "DELETE FROM usersessions WHERE userId = '" + userid + "';"
+  console.log(sql)
+  var params = []
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.send("<script>window.location.href = '/';</script>");
+  })
+})
 
 app.post("/new_question", async (req, res) => {
   console.log(req.body)
