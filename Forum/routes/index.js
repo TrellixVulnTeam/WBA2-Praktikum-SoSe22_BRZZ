@@ -2,31 +2,21 @@ const express = require('express');
 const { path } = require('express/lib/application');
 const bcrypt = require('bcrypt');
 const { nanoid } = require('nanoid');
-var router = express.Router();
-const app = express();
+//var router = express.Router();
+const app = module.exports = express();
 var db = require('../database');
 const { json } = require('express/lib/response');
 const { hash } = require('bcrypt');
 const req = require('express/lib/request');
 const cookieParser = require("cookie-parser");
->>>>>>> c940447cb2187b5d0c1888a8e3df71941c7cc876
 
 app.use(express.static('public'));
 
 app.use(cookieParser());
 
-//router.get('/', function(req, res, next) {
-
-//res.render('index', { title: 'Express' });
-//res.sendFile(__dirname + '/html/home.html');
-//res.sendFile(__dirname + '/html/header.js')
-//res.sendFile(__dirname + '/html/lib/style.css');
-//});
-
-router.use((req, res, next) => {
-  console.log(req.cookies)
-  if (req.cookies.sessionid){
-    var user = ""
+app.use("/", (req, res, next) => {
+  sessionId = req.cookies.sessionid
+  if (sessionId){
     var sql = "SELECT * FROM usersessions WHERE id = '" + req.cookies.sessionid + "';"
     var params = [];
     db.all(sql, params, (err, rows) => {
@@ -35,14 +25,29 @@ router.use((req, res, next) => {
         return;
       }
       if (rows.length == 0){
-
+        userid = "0"
       }
+      else {
+        if (parseInt(rows[0].endTime) < Date.now()){
+          console.log(String(sessionId) + " - Session already ended")
+          userid = "0"
+        }
+        else if (parseInt(rows[0].startTime) > Date.now()){
+          console.log(String(sessionId) + " - Session hasn't started yet")
+          userid = "0"
+        }
+        else{
+          console.log(String(sessionId) + " - Valid Session")
+          userid = rows[0].userId
+        }
+      }
+      req.body.sessionUserId = userid
+      next()
     });
   }
-  next()
 });
 
-router.post("/new_user", async (req, res) => {
+app.post("/new_user", async (req, res) => {
   let jsonData = req.body;
   let new_id = nanoid();
   let new_join_date = new Date().toISOString().slice(0, 10);
@@ -62,7 +67,7 @@ router.post("/new_user", async (req, res) => {
   });
 });
 
-router.post("/new_session", async (req, res) => {
+app.post("/new_session", async (req, res) => {
   let jsonData = req.body;
   let user = jsonData.username;
   let password = jsonData.password;
@@ -83,7 +88,7 @@ router.post("/new_session", async (req, res) => {
       let new_session_id = nanoid();
       let new_user_id = rows[0].id;
       let new_start_time = Date.now()
-      let new_end_time = new_start_time + 120000
+      let new_end_time = new_start_time + 1200000
       var sql = "INSERT INTO usersessions (id, userId, startTime, endTime) VALUES ('" + new_session_id + "', '" + new_user_id + "', '" + new_start_time + "', '" + new_end_time + "');"
       var params = [];
       db.all(sql, params, (err, new_rows) => {
@@ -103,11 +108,12 @@ router.post("/new_session", async (req, res) => {
   });
 });
 
-router.post("/new_question", async (req, res) => {
+app.post("/new_question", async (req, res) => {
+  console.log(req.body)
   let jsonData = req.body;
   let new_question_id = nanoid();
   let new_date_posted = new Date().toISOString().slice(0, 10);
-  let userid = "default"; //Folgt noch
+  let userid = req.body.sessionUserId;
   let upvotes = 0;
   let downvotes = 0;
 
@@ -122,7 +128,7 @@ router.post("/new_question", async (req, res) => {
   });
 });
 
-router.post("/questions", (req, res) => {
+app.post("/questions", (req, res) => {
   let jsonData = req.body;
   var sql = "SELECT * FROM questions WHERE categorie = '" + jsonData.categorie + "';"
   var params = [];
@@ -135,7 +141,7 @@ router.post("/questions", (req, res) => {
   });
 });
 
-router.post("/like", (req, res) => {
+app.post("/like", (req, res) => {
   let jsonData = req.body;
   var sql = "UPDATE questions SET upvotes=upvotes+1 WHERE id = '" + jsonData.id + "';"
   var params = [];
@@ -148,7 +154,7 @@ router.post("/like", (req, res) => {
   });
 });
 
-router.post("/dislike", (req, res) => {
+app.post("/dislike", (req, res) => {
   let jsonData = req.body;
   var sql = "UPDATE questions SET downvotes=downvotes+1 WHERE id = '" + jsonData.id + "';"
   var params =[];
@@ -160,5 +166,3 @@ router.post("/dislike", (req, res) => {
     res.sendStatus(200);
   });
 });
-
-module.exports = router;
