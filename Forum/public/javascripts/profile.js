@@ -19,7 +19,7 @@ function updateProfilePicture(){
 
 async function main() {
     document.getElementById("username").innerHTML = await getUserName();
-    document.getElementById("sendPictureButton").addEventListener("click", updateProfilePicture)
+    document.getElementById("btn_upload_profile_pic").addEventListener("click", updateProfilePicture)
     
     var tab_body = document.getElementById("tab_body");
 
