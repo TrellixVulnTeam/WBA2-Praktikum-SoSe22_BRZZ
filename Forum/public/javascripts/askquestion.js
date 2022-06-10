@@ -11,7 +11,7 @@ function sendForm() {
 
     question = question_input.value;
     explanation = explanation_input.value;
-    categorie = categorie_input.value;
+    categorie = categorie_input.value.toLowerCase();
 
     if (question === "") {
         window.alert("Question can not be empty!");
@@ -26,7 +26,7 @@ function sendForm() {
             "categorie": categorie
         }
 
-        fetch("http://localhost:3000/new_question", {
+        fetch("/new_question", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

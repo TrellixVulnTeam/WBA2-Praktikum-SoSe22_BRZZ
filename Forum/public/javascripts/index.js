@@ -1,1 +1,6 @@
-python_button = document.getElementById("topic_python");
+document.getElementById("topic_python").addEventListener("click", () => window.location="/single_cathegory.html?python")
+document.getElementById("topic_cryptography").addEventListener("click", () => window.location="/single_cathegory.html?cryptography")
+document.getElementById("topic_it-security").addEventListener("click", () => window.location="/single_cathegory.html?it-security")
+document.getElementById("topic_securenetworks").addEventListener("click", () => window.location="/single_cathegory.html?secure_networks")
+document.getElementById("topic_coding").addEventListener("click", () => window.location="/single_cathegory.html?coding")
+document.getElementById("topic_databases").addEventListener("click", () => window.location="/single_cathegory.html?databases")

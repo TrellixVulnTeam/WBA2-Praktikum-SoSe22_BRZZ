@@ -1,44 +1,95 @@
-likebutton = document.getElementsByClassName("bild_oben");
-dislikebutton = document.getElementsByClassName("bild_unten");
-categorie = document.getElementsByTagName("h1")[1].innerText;
+async function loadPage(cathegory) {
+    document.getElementById("cathegory").innerHTML = cathegory
 
-document.addEventListener("DOMContentLoaded", sendForm);
-
-for (let i = 0; i <= likebutton.length; i++) {
-    likebutton[i].addEventListener("click", sendLike);
-    dislikebutton[i].addEventListener("click", senddisLike);
-}
-
-async function sendForm() {
-
-    data = {
-        "categorie": categorie
-    }
-
-    let res = await fetch("http://localhost:3000/questions", {
-        method: "POST",
+    let res = await fetch("/questions/" + cathegory, {
+        method: "GET",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
     });
 
     res = await res.json();
 
-    console.log(res);
+    res.sort(function(obj2, obj1) {
+        return (obj1.upvotes - obj1.downvotes) - (obj2.upvotes - obj2.downvotes);
+    });
 
-    for (i = 0; i <= res.length; i++) {
-        //Komischer Fehler???
-        var questiontext = String(res[i]['questiontext']);
-        var explanation = String(res[i]['explanation']);
-        console.log(questiontext);
-        console.log(explanation);
+    body = document.getElementsByTagName("body")[0]
+
+    for (var i = 0; i < res.length; i++){
+        questionID = res[i].id
+        userID = res[i].userid
+        datePosted = res[i].dateposted
+        questionText = res[i].questiontext
+        explanationText = res[i].explanation
+        numberUpvotes = res[i].upvotes
+        numberDownvotes = res[i].downvotes
+        numberScore = String(parseInt(numberUpvotes) - parseInt(numberDownvotes))
+
+        questionContainer = document.createElement("div")
+        questionContainer.setAttribute("id", questionID)
+        questionContainer.setAttribute("style", "width:90%;margin:auto;display:flex;flex-direction:row;border:solid")
+        body.appendChild(questionContainer)
+        body.appendChild(document.createElement("br"))
+
+        userPanel = document.createElement("div")
+        userPanel.setAttribute("id", "userPanel-" + userID)
+        userPanel.setAttribute("style", "width:20%;order:1;")
+        questionContainer.appendChild(userPanel)
+
+        profilePicture = document.createElement("img")
+        profilePicture.setAttribute("style", "width:80%;")
+        profilePicture.setAttribute("src", "/profilePicture/" + userID)
+        userPanel.appendChild(profilePicture)
+
+        userName = document.createElement("p")
+        userNameText = await fetch("/username/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
+        userNameText = await userNameText.json()
+        userName.innerHTML = userNameText.username
+        userPanel.appendChild(userName)
+
+        questionPanel = document.createElement("div")
+        questionPanel.setAttribute("id", "questionPanel-" + questionID)
+        questionPanel.setAttribute("style", "width:60%;order:2")
+        questionContainer.appendChild(questionPanel)
+
+        question = document.createElement("h2")
+        question.innerHTML = questionText
+        questionPanel.appendChild(question)
+
+        explanation = document.createElement("p")
+        explanation.innerHTML = explanationText
+        questionPanel.appendChild(explanation)
+
+        metadata = document.createElement("p")
+        metadata.innerHTML = "posted on: " + datePosted + " ID: " + questionID
+        questionPanel.appendChild(metadata)
+
+        votePanel = document.createElement("div")
+        votePanel.setAttribute("id", "votePanel")
+        votePanel.setAttribute("style", "width:20%;order:3;text-align:center;")
+        questionContainer.appendChild(votePanel)
+
+        upvote = document.createElement("img")
+        upvote.setAttribute("src", "lib/oben_pfeil.png")
+        upvote.setAttribute("style", "width:32%;top:10px;")
+        upvote.addEventListener("click", (questionID) => sendLike(questionID))
+        votePanel.appendChild(upvote)
+
+        score = document.createElement("p")
+        score.innerHTML = numberScore
+        votePanel.appendChild(score)
+
+        downvote = document.createElement("img")
+        downvote.setAttribute("src", "lib/unten_pfeil.png")
+        downvote.setAttribute("style", "width:30%;bottom:0;")
+        downvote.addEventListener("click", (questionID) => senddisLike(questionID))
+        votePanel.appendChild(downvote)
     }
 }
 
-async function sendLike() {
-    //Wie bekomme ich die QuestionID der Frage die Like/Dislike bekommt?
-    console.log("Like!");
+async function sendLike(questionID) {
+    id = questionID.path[2].id
     data = {
-        "id": "nV1y6Ex3OTPEtajMZks28"
+        "id": id
     }
 
     await fetch("http://localhost:3000/like", {
@@ -46,12 +97,14 @@ async function sendLike() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     });
+
+    questionID.path[1].children[1].innerHTML = String(parseInt(questionID.path[1].children[1].innerHTML) + 1)
 }
 
-async function senddisLike() {
-    console.log("DisLike!");
+async function senddisLike(questionID) {
+    id = questionID.path[2].id
     data = {
-        "id": "nV1y6Ex3OTPEtajMZks28"
+        "id": id
     }
 
     await fetch("http://localhost:3000/dislike", {
@@ -60,4 +113,9 @@ async function senddisLike() {
         body: JSON.stringify(data)
     });
 
+    questionID.path[1].children[1].innerHTML = String(parseInt(questionID.path[1].children[1].innerHTML) - 1)
 }
+
+cathegory = window.location.search.substring(1)
+
+document.addEventListener("DOMContentLoaded", () => loadPage(cathegory));

@@ -159,9 +159,8 @@ app.post("/new_question", async (req, res) => {
   });
 });
 
-app.post("/questions", (req, res) => {
-  let jsonData = req.body;
-  var sql = "SELECT * FROM questions WHERE categorie = '" + jsonData.categorie + "';"
+app.get("/questions/:cathegory", (req, res) => {
+  var sql = "SELECT * FROM questions WHERE categorie = '" + req.params.cathegory + "';"
   var params = [];
   db.all(sql, params, (err, rows) => {
     if (err) {
@@ -201,6 +200,24 @@ app.post("/dislike", (req, res) => {
 app.get("/profilePicture", (req, res) => {
   let jsonData = req.body;
   let id = jsonData.sessionUserId;
+  var sql = "SELECT * FROM users WHERE id = '" + id + "';";
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    else if (rows.length == 0) {
+      res.sendFile(pathFunc.join(__dirname, '../public', "lib/profilePictures/default.png"))
+    }
+    else {
+      res.sendFile(pathFunc.join(__dirname, '../public', "lib/profilePictures" + rows[0].profilepicturepath))
+    }
+  });
+});
+
+app.get("/profilePicture/:id", (req, res) => {
+  let id = req.params.id;
   var sql = "SELECT * FROM users WHERE id = '" + id + "';";
   var params = [];
   db.all(sql, params, (err, rows) => {
@@ -285,6 +302,26 @@ app.post("/profilePicture", async function (req, res) {
 app.get("/username", (req, res) => {
   let jsonData = req.body;
   let id = jsonData.sessionUserId;
+  var sql = "SELECT * FROM users WHERE id = '" + id + "';";
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.sendStatus(400)
+      return;
+    }
+    else if (rows.length == 0) {
+      res.sendStatus(400)
+      return;
+    }
+    else {
+      output = { username: rows[0].username }
+      res.send(JSON.stringify(output));
+    }
+  });
+});
+
+app.get("/username/:id", (req, res) => {
+  let id = req.params.id;
   var sql = "SELECT * FROM users WHERE id = '" + id + "';";
   var params = [];
   db.all(sql, params, (err, rows) => {
