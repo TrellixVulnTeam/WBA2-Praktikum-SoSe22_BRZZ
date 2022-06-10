@@ -140,7 +140,6 @@ app.get("/logout", (req, res) => {
 })
 
 app.post("/new_question", async (req, res) => {
-  console.log(req.body)
   let jsonData = req.body;
   let new_question_id = nanoid();
   let new_date_posted = new Date().toISOString().slice(0, 10);
@@ -149,6 +148,25 @@ app.post("/new_question", async (req, res) => {
   let downvotes = 0;
 
   var sql = "insert into questions (id, userid, questiontext, explanation, dateposted, upvotes, downvotes, categorie) VALUES ('" + new_question_id + "', '" + userid + "', '" + jsonData.question + "','" + jsonData.explanation + "','" + new_date_posted + "','" + upvotes + "','" + downvotes + "','" + jsonData.categorie + "');"
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.sendStatus(200);
+  });
+});
+
+app.post("/new_answer/:id", async (req, res) => {
+  let answertext = req.body.answerText;
+  let new_answer_id = nanoid();
+  let new_date_posted = new Date().toISOString().slice(0, 10);
+  let userid = req.body.sessionUserId;
+  let upvotes = 0;
+  let downvotes = 0;
+
+  var sql = "insert into answers (id, userid, questionid, answertext, dateposted, upvotes, downvotes) VALUES ('" + new_answer_id + "', '" + userid + "', '" + req.params.id + "','" + answertext + "','" + new_date_posted + "','" + upvotes + "','" + downvotes + "');"
   var params = [];
   db.all(sql, params, (err, rows) => {
     if (err) {
@@ -171,7 +189,31 @@ app.get("/questions/:cathegory", (req, res) => {
   });
 });
 
-app.post("/like", (req, res) => {
+app.get("/answers/:id", (req, res) => {
+  var sql = "SELECT * FROM answers WHERE questionid = '" + req.params.id + "';"
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.send(JSON.stringify(rows));
+  });
+});
+
+app.get("/question/:id", (req, res) => {
+  var sql = "SELECT * FROM questions WHERE id = '" + req.params.id + "';"
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.send(JSON.stringify(rows));
+  });
+});
+
+app.post("/likeQuestion", (req, res) => {
   let jsonData = req.body;
   var sql = "UPDATE questions SET upvotes=upvotes+1 WHERE id = '" + jsonData.id + "';"
   var params = [];
@@ -184,9 +226,35 @@ app.post("/like", (req, res) => {
   });
 });
 
-app.post("/dislike", (req, res) => {
+app.post("/dislikeQuestion", (req, res) => {
   let jsonData = req.body;
   var sql = "UPDATE questions SET downvotes=downvotes+1 WHERE id = '" + jsonData.id + "';"
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.sendStatus(200);
+  });
+});
+
+app.post("/likeAnswer", (req, res) => {
+  let jsonData = req.body;
+  var sql = "UPDATE answers SET upvotes=upvotes+1 WHERE id = '" + jsonData.id + "';"
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.sendStatus(200);
+  });
+});
+
+app.post("/dislikeAnswer", (req, res) => {
+  let jsonData = req.body;
+  var sql = "UPDATE answers SET downvotes=downvotes+1 WHERE id = '" + jsonData.id + "';"
   var params = [];
   db.all(sql, params, (err, rows) => {
     if (err) {

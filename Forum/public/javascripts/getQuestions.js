@@ -49,6 +49,7 @@ async function loadPage(cathegory) {
         questionPanel = document.createElement("div")
         questionPanel.setAttribute("id", "questionPanel-" + questionID)
         questionPanel.setAttribute("style", "width:60%;order:2")
+        questionPanel.addEventListener("click", (questionID) => openQuestion(questionID))
         questionContainer.appendChild(questionPanel)
 
         question = document.createElement("h2")
@@ -114,6 +115,19 @@ async function senddisLike(questionID) {
     });
 
     questionID.path[1].children[1].innerHTML = String(parseInt(questionID.path[1].children[1].innerHTML) - 1)
+}
+
+async function openQuestion(questionID){
+    id = questionID.path[2].id
+    for (var i = 0; i < questionID.path.length; i++){
+        if (questionID.path[i].id){
+            if (questionID.path[i].id.includes("questionPanel-")){
+                id = questionID.path[i].id.replace("questionPanel-", "")
+                break
+            }
+        }
+    }
+    window.location = "/frage_antwort.html?" + id
 }
 
 cathegory = window.location.search.substring(1)

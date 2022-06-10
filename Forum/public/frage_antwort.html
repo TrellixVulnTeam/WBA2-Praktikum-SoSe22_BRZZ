@@ -5,44 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/style.css">
     <title>ITS-Forum</title>
-</head>  
+</head>
 
 <header>
     <script src="header.js"></script>
 </header>
 
 <body>
-    <div>
-        <p class="frage_eins">The question is if I am in the right place to ask questions? </p>
-        <a href="profile.html" ><img class="pfile" src="lib/profil.png" alt="profil" width="55px" height="55px"></a> 
-        <p class="pname">username</p>
-        
+    <div id="question"></div>
+    <br>
+    <div id="newAnswer">
+        <textarea id="answerInput" type="text" class="antwort_feld" placeholder="You got an answer?" cols="55"></textarea><br>
+        <input id="answerButton" type="button" class="frage_submit" value="answer">
     </div>
-    <div>
-        <textarea type="text" class="antwort_feld" placeholder="You got an answer?" cols="55"></textarea><br>
-        <input type="submit" class="frage_submit" value="answer">
-    </div>
-    <div id="all_vote">
-        <a href="" class="bild_oben"><img src="lib/oben_pfeil.png" alt="" height="30px" width="30px"></a>
-        <p class="votecounter">Vote</p>
-        <a href="" class="bild_unten"><img src="lib/unten_pfeil.png" alt="" height="30px" width="30px"></a>
-    </div>
-
-    <div>
-        <p class="antwort_eins">Here i have a nice first answer for your question!</p>
-        <a href="profile.html" ><img class="antwort_pfile" src="lib/profil.png" alt="profil" width="40px" height="40px"></a>
-        <p class="antwort_pname">username</p>
-    </div>
-    <div>
-        <p class="antwort_zwei">Here i have a nice second answer for your question!</p>
-        <a href="profile.html" ><img class="antwort_pfile_zwei" src="lib/profil.png" alt="profil" width="40px" height="40px"></a>
-        <p class="antwort_pname_zwei">username</p>
-    </div>
-    <div>
-        <p class="antwort_drei">Here i have a nice third answer for your question!</p>
-        <a href="profile.html" ><img class="antwort_pfile_drei" src="lib/profil.png" alt="profil" width="40px" height="40px"></a>
-        <p class="antwort_pname_drei">username</p>
-    </div>
-
+    <br>
+    <div id="answers"></div>
 </body>
+<script src="/javascripts/getSingleQwA.js"></script>
+
 </html>
