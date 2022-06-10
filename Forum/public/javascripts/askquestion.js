@@ -7,7 +7,7 @@ submitbutton.addEventListener("click", sendForm);
 
 
 
-function sendForm() {
+async function sendForm() {
 
     question = question_input.value;
     explanation = explanation_input.value;
@@ -26,10 +26,14 @@ function sendForm() {
             "categorie": categorie
         }
 
-        fetch("/new_question", {
+        res = await fetch("/new_question", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
+
+        res = await res.json()
+
+        window.location = "/frage_antwort.html?" + res.id
     }
 }

@@ -93,7 +93,7 @@ async function sendLike(questionID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/like", {
+    await fetch("http://localhost:3000/likeQuestion", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -108,7 +108,7 @@ async function senddisLike(questionID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/dislike", {
+    await fetch("http://localhost:3000/dislikeQuestion", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

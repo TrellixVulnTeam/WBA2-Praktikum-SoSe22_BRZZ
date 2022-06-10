@@ -154,7 +154,7 @@ app.post("/new_question", async (req, res) => {
       res.status(400).json({ "error": err.message });
       return;
     }
-    res.sendStatus(200);
+    res.send(JSON.stringify({"id": new_question_id}));
   });
 });
 

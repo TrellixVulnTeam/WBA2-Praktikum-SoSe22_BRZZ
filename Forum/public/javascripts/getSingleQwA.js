@@ -88,6 +88,10 @@ async function loadAnswers(questionID){
         headers: {'Content-Type': 'application/json'},
     })
     res = await res.json()
+    
+    res.sort(function(obj2, obj1) {
+        return (obj1.upvotes - obj1.downvotes) - (obj2.upvotes - obj2.downvotes);
+    });
 
     answers = document.getElementById("answers")
     answers.innerHTML = ""
