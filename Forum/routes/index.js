@@ -360,7 +360,7 @@ app.post("/profilePicture", async function (req, res) {
           res.sendStatus(400);
         }
         else{
-          res.send("<script>window.location.href = '/profile.html';</script>")
+          res.send("<script>window.location.href = '/profile.html?" + id + "';</script>")
         }
       });
     }
@@ -384,6 +384,51 @@ app.get("/username", (req, res) => {
     else {
       output = { username: rows[0].username }
       res.send(JSON.stringify(output));
+    }
+  });
+});
+
+app.get("/profileData/:id", (req, res) => {
+  let id = req.params.id;
+  var sql = "SELECT * FROM users WHERE id = '" + id + "';";
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.sendStatus(400)
+      return;
+    }
+    else if (rows.length == 0) {
+      res.sendStatus(400)
+      return;
+    }
+    else {
+      output = {userdata: rows[0]}
+
+      var sql = "SELECT * FROM questions WHERE userid = '" + id + "';";
+      var params = [];
+      db.all(sql, params, (err, rows) => {
+        if (err) {
+          res.sendStatus(400)
+          return;
+        }
+        else{
+          output.questions = rows;
+
+          var sql = "SELECT * FROM answers WHERE userid = '" + id + "';";
+          var params = [];
+          db.all(sql, params, (err, rows) => {
+            if (err) {
+              res.sendStatus(400)
+              return;
+            }
+            else{
+              output.answers = rows;
+
+              res.send(JSON.stringify(output));
+            }
+          });        
+        }
+      });
     }
   });
 });

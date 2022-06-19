@@ -43,17 +43,18 @@ async function isLoggedIn(){
     });
     res = await res.json()
     if (res.loggedin == "true"){
-        return true
+        return [true, res]
     }
     else{
-        return false
+        return [false, res]
     }
 }
 async function main(){
     res = await isLoggedIn()
-    if(res){
+    if(res[0]){
         document.getElementById("loginTab").remove()
         document.getElementById("signupTab").remove()
+        document.getElementById("profileTab").setAttribute("href", "profile.html?" + res[1].userid)
     }
     else{
         document.getElementById("questionTab").remove()

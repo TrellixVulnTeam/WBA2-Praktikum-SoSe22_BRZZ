@@ -28,16 +28,20 @@ async function loadPage(questionID) {
     userPanel.setAttribute("style", "width:20%;order:1;")
     questionContainer.appendChild(userPanel)
 
+    userLink = document.createElement("a")
+    userLink.setAttribute("href", "/profile.html?" + userID)
+    userPanel.appendChild(userLink)
+
     profilePicture = document.createElement("img")
     profilePicture.setAttribute("style", "width:80%;")
     profilePicture.setAttribute("src", "/profilePicture/" + userID)
-    userPanel.appendChild(profilePicture)
+    userLink.appendChild(profilePicture)
 
     userName = document.createElement("p")
     userNameText = await fetch("/username/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
     userNameText = await userNameText.json()
     userName.innerHTML = userNameText.username
-    userPanel.appendChild(userName)
+    userLink.appendChild(userName)
 
     questionPanel = document.createElement("div")
     questionPanel.setAttribute("id", "questionPanel-" + questionID)
@@ -116,16 +120,20 @@ async function loadAnswers(questionID){
         userPanel.setAttribute("style", "width:20%;order:1;")
         answerContainer.appendChild(userPanel)
 
+        userLink = document.createElement("a")
+        userLink.setAttribute("href", "/profile.html?" + userID)
+        userPanel.appendChild(userLink)
+
         profilePicture = document.createElement("img")
         profilePicture.setAttribute("style", "width:80%;")
         profilePicture.setAttribute("src", "/profilePicture/" + userID)
-        userPanel.appendChild(profilePicture)
+        userLink.appendChild(profilePicture)
 
         userName = document.createElement("p")
         userNameText = await fetch("/username/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
         userNameText = await userNameText.json()
         userName.innerHTML = userNameText.username
-        userPanel.appendChild(userName)
+        userLink.appendChild(userName)
 
         answerPanel = document.createElement("div")
         answerPanel.setAttribute("id", "answerPanel-" + answerID)
