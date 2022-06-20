@@ -316,6 +316,20 @@ async function senddisLikeAnswer(answerID) {
     answerID.path[1].children[1].innerHTML = String(parseInt(answerID.path[1].children[1].innerHTML) - 1)
 }
 
+async function isLoggedIn(){
+    let res = await fetch("/isLoggedIn", {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
+    });
+    res = await res.json()
+    if (res.loggedin == "true"){
+        return [true, res]
+    }
+    else{
+        return [false, res]
+    }
+}
+
 async function main() {
     profileData = await getProfileData(id);
 
@@ -336,4 +350,10 @@ async function main() {
 
     document.querySelector("user_questions")
     loadProfileInfo();
+
+    loggedIn = await isLoggedIn()
+
+    if(!(loggedIn[0] & (loggedIn[1].userid == id))){
+        document.getElementById("pictureOverlay").remove()
+    }
 }
