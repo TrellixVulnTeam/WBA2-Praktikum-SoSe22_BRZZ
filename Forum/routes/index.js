@@ -1,15 +1,6 @@
 const express = require('express');
-const { path } = require('express/lib/application');
-const bcrypt = require('bcrypt');
-const { nanoid } = require('nanoid');
-var router = express.Router();
 var db = require('../database');
-const { json } = require('express/lib/response');
-const { hash } = require('bcrypt');
-const req = require('express/lib/request');
 const cookieParser = require("cookie-parser");
-
-var pathFunc = require('path');
 
 const app = module.exports = express();
 
