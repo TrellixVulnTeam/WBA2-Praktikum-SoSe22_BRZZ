@@ -38,7 +38,7 @@ async function loadPage(questionID) {
     userLink.appendChild(profilePicture)
 
     userName = document.createElement("p")
-    userNameText = await fetch("/user/name/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
+    userNameText = await fetch("/user/name/" + userID, { method: "GET", headers: { 'Content-Type': 'application/json' } })
     userNameText = await userNameText.json()
     userName.innerHTML = userNameText.username
     userLink.appendChild(userName)
@@ -83,24 +83,29 @@ async function loadPage(questionID) {
 
     document.getElementById("answerButton").addEventListener("click", () => sendAnswer(questionID))
 
+    let loggedIn = await isLoggedIn();
+    if (!loggedIn[0]){
+        document.getElementById("newAnswer").remove()
+    }
+
     loadAnswers(questionID)
 }
 
-async function loadAnswers(questionID){
+async function loadAnswers(questionID) {
     res = await fetch("/answer/" + questionID, {
         method: "GET",
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
     })
     res = await res.json()
-    
-    res.sort(function(obj2, obj1) {
+
+    res.sort(function (obj2, obj1) {
         return (obj1.upvotes - obj1.downvotes) - (obj2.upvotes - obj2.downvotes);
     });
 
     answers = document.getElementById("answers")
     answers.innerHTML = ""
 
-    for (var i = 0; i < res.length; i++){
+    for (var i = 0; i < res.length; i++) {
         answerID = res[i].id
         userID = res[i].userid
         datePosted = res[i].dateposted
@@ -130,7 +135,7 @@ async function loadAnswers(questionID){
         userLink.appendChild(profilePicture)
 
         userName = document.createElement("p")
-        userNameText = await fetch("/user/name/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
+        userNameText = await fetch("/user/name/" + userID, { method: "GET", headers: { 'Content-Type': 'application/json' } })
         userNameText = await userNameText.json()
         userName.innerHTML = userNameText.username
         userLink.appendChild(userName)
@@ -173,11 +178,11 @@ async function loadAnswers(questionID){
 
 async function sendAnswer(questionID) {
     answerText = document.getElementById("answerInput").value
-    json = {"answerText": answerText}
+    json = { "answerText": answerText }
 
     fetch("/answer/new/" + questionID, {
         method: "POST",
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(json)
     })
 
@@ -244,4 +249,18 @@ async function senddisLikeQuestion(questionID) {
     });
 
     questionID.path[1].children[1].innerHTML = String(parseInt(questionID.path[1].children[1].innerHTML) - 1)
+}
+
+async function isLoggedIn() {
+    let res = await fetch("/user/isLoggedIn", {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
+    });
+    res = await res.json()
+    if (res.loggedin == "true") {
+        return [true, res]
+    }
+    else {
+        return [false, res]
+    }
 }
