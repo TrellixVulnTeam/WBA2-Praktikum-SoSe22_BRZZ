@@ -1,7 +1,7 @@
 async function loadPage(cathegory) {
     document.getElementById("cathegory").innerHTML = cathegory
 
-    let res = await fetch("/questions/" + cathegory, {
+    let res = await fetch("/question/cathegory/" + cathegory, {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     });
@@ -41,11 +41,11 @@ async function loadPage(cathegory) {
 
         profilePicture = document.createElement("img")
         profilePicture.setAttribute("style", "width:80%;")
-        profilePicture.setAttribute("src", "/profilePicture/" + userID)
+        profilePicture.setAttribute("src", "/user/profilePicture/" + userID)
         userLink.appendChild(profilePicture)
 
         userName = document.createElement("p")
-        userNameText = await fetch("/username/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
+        userNameText = await fetch("/user/name/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
         userNameText = await userNameText.json()
         userName.innerHTML = userNameText.username
         userLink.appendChild(userName)
@@ -97,7 +97,7 @@ async function sendLike(questionID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/likeQuestion", {
+    await fetch("/question/like", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -112,7 +112,7 @@ async function senddisLike(questionID) {
         "id": id
     }
 
-    await fetch("/dislikeQuestion", {
+    await fetch("/question/dislike", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

@@ -12,7 +12,7 @@ document.write('\
             </div>\
         </th>\
         <th class="border">\
-            <a id="profileTab" href="profile.html"><img id="Profil" src="/profilePicture" alt="Profil" style="height:100px;"></a>\
+            <a id="profileTab" href="profile.html"><img id="Profil" src="/user/profilePicture" alt="Profil" style="height:100px;"></a>\
         </th>\
         <th class="border">\
             <nav>\
@@ -24,7 +24,7 @@ document.write('\
                         <a href="kategorie.html">Categories</a>\
                         <a id="loginTab" href="login.html">Log in</a>\
                         <a id="signupTab" href="signup.html">Sign up</a>\
-                        <a id="logoutTab" href="logout">Log Out</a>\
+                        <a id="logoutTab" href="/user/logout">Log Out</a>\
                     </div>\
                 </div>\
             </nav>\
@@ -37,7 +37,7 @@ document.write('\
 document.addEventListener("DOMContentLoaded", main);
 
 async function isLoggedIn(){
-    let res = await fetch("/isLoggedIn", {
+    let res = await fetch("/user/isLoggedIn", {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     });

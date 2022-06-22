@@ -2,17 +2,8 @@ id = window.location.search.substring(1);
 
 document.addEventListener("DOMContentLoaded", main);
 
-async function getUserName(){
-    let res = await fetch("/username", {
-        method: "GET",
-        headers: { 'Content-Type': 'application/json' },
-    });
-    res = await res.json()
-    return res.username
-}
-
 async function getProfileData(id){
-    let res = await fetch("/profileData/" + id, {
+    let res = await fetch("/user/profileData/" + id, {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     });
@@ -25,7 +16,7 @@ function updateProfilePicture(){
     let formData = new FormData();
         
     formData.append("photo", newProfilePic);
-    fetch('/profilePicture', {method: "POST", body: formData});
+    fetch('/user/profilePicture', {method: "POST", body: formData});
 }
 
 function loadProfileInfo() {
@@ -156,7 +147,7 @@ async function sendLike(questionID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/likeQuestion", {
+    await fetch("/question/like", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -171,7 +162,7 @@ async function senddisLike(questionID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/dislikeQuestion", {
+    await fetch("/question/dislike", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -292,7 +283,7 @@ async function sendLikeAnswer(answerID) {
         "id": id
     }
 
-    await fetch("/likeAnswer", {
+    await fetch("/answer/like", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -307,7 +298,7 @@ async function senddisLikeAnswer(answerID) {
         "id": id
     }
 
-    await fetch("/dislikeAnswer", {
+    await fetch("/answer/dislike", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -317,7 +308,7 @@ async function senddisLikeAnswer(answerID) {
 }
 
 async function isLoggedIn(){
-    let res = await fetch("/isLoggedIn", {
+    let res = await fetch("/user/isLoggedIn", {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     });
@@ -334,7 +325,7 @@ async function main() {
     profileData = await getProfileData(id);
 
     document.getElementById("username").innerHTML = profileData.userdata.username;
-    document.getElementById("profilePicture").setAttribute("src", "/profilePicture/" + id)
+    document.getElementById("profilePicture").setAttribute("src", "/user/profilePicture/" + id)
     document.getElementById("btn_upload_profile_pic").addEventListener("click", updateProfilePicture)
     
     var tab_body = document.getElementById("tab_body");

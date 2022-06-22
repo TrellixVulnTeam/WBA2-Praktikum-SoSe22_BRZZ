@@ -27,7 +27,7 @@ function sendForm() {
             "submit": submitbutton
         }
 
-        fetch("http://localhost:3000/new_user", {
+        fetch("/user/new", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

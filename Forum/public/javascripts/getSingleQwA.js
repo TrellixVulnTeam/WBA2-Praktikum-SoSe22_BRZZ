@@ -34,11 +34,11 @@ async function loadPage(questionID) {
 
     profilePicture = document.createElement("img")
     profilePicture.setAttribute("style", "width:80%;")
-    profilePicture.setAttribute("src", "/profilePicture/" + userID)
+    profilePicture.setAttribute("src", "/user/profilePicture/" + userID)
     userLink.appendChild(profilePicture)
 
     userName = document.createElement("p")
-    userNameText = await fetch("/username/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
+    userNameText = await fetch("/user/name/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
     userNameText = await userNameText.json()
     userName.innerHTML = userNameText.username
     userLink.appendChild(userName)
@@ -87,7 +87,7 @@ async function loadPage(questionID) {
 }
 
 async function loadAnswers(questionID){
-    res = await fetch("/answers/" + questionID, {
+    res = await fetch("/answer/" + questionID, {
         method: "GET",
         headers: {'Content-Type': 'application/json'},
     })
@@ -126,11 +126,11 @@ async function loadAnswers(questionID){
 
         profilePicture = document.createElement("img")
         profilePicture.setAttribute("style", "width:80%;")
-        profilePicture.setAttribute("src", "/profilePicture/" + userID)
+        profilePicture.setAttribute("src", "/user/profilePicture/" + userID)
         userLink.appendChild(profilePicture)
 
         userName = document.createElement("p")
-        userNameText = await fetch("/username/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
+        userNameText = await fetch("/user/name/" + userID, {method:"GET", headers: { 'Content-Type': 'application/json' }})
         userNameText = await userNameText.json()
         userName.innerHTML = userNameText.username
         userLink.appendChild(userName)
@@ -175,7 +175,7 @@ async function sendAnswer(questionID) {
     answerText = document.getElementById("answerInput").value
     json = {"answerText": answerText}
 
-    fetch("/new_answer/" + questionID, {
+    fetch("/answer/new/" + questionID, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(json)
@@ -192,7 +192,7 @@ async function sendLikeAnswer(answerID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/likeAnswer", {
+    await fetch("/answer/like", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -207,7 +207,7 @@ async function senddisLikeAnswer(answerID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/dislikeAnswer", {
+    await fetch("/answer/dislike", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -222,7 +222,7 @@ async function sendLikeQuestion(questionID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/likeQuestion", {
+    await fetch("/question/like", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -237,7 +237,7 @@ async function senddisLikeQuestion(questionID) {
         "id": id
     }
 
-    await fetch("http://localhost:3000/dislikeQuestion", {
+    await fetch("/question/dislike", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

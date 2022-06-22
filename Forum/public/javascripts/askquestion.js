@@ -26,7 +26,7 @@ async function sendForm() {
             "categorie": categorie
         }
 
-        res = await fetch("/new_question", {
+        res = await fetch("/question/new", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
