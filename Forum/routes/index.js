@@ -1,17 +1,16 @@
 const express = require('express');
+var router = express.Router();
 var db = require('../database');
 const cookieParser = require("cookie-parser");
 
-const app = module.exports = express();
+router.use(express.static('public'));
 
-app.use(express.static('public'));
+router.use(cookieParser());
 
-app.use(cookieParser());
-
-app.use("/", (req, res, next) => {
-  sessionId = req.cookies.sessionid
+router.use("/", (req, res, next) => {
+  let sessionId = req.cookies.sessionid
   if (sessionId) {
-    var sql = "SELECT * FROM usersessions WHERE id = '" + req.cookies.sessionid + "';"
+    var sql = "SELECT * FROM usersessions WHERE id = '" + sessionId + "';"
     var params = [];
     db.all(sql, params, (err, rows) => {
       if (err) {
@@ -44,3 +43,5 @@ app.use("/", (req, res, next) => {
     next()
   }
 });
+
+module.exports = router;
