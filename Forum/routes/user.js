@@ -7,10 +7,6 @@ var express = require('express');
 var router = express.Router();
 var db = require('../database');
 
-/*router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});*/
-
 // USERS
 router.post("/new", async (req, res) => {
   let jsonData = req.body;
@@ -68,7 +64,7 @@ router.get("/profileData/:id", (req, res) => {
       return;
     }
     else {
-      output = {userdata: rows[0]}
+      output = { userdata: rows[0] }
 
       var sql = "SELECT * FROM questions WHERE userid = '" + id + "';";
       var params = [];
@@ -77,7 +73,7 @@ router.get("/profileData/:id", (req, res) => {
           res.sendStatus(400)
           return;
         }
-        else{
+        else {
           output.questions = rows;
 
           var sql = "SELECT * FROM answers WHERE userid = '" + id + "';";
@@ -87,12 +83,12 @@ router.get("/profileData/:id", (req, res) => {
               res.sendStatus(400)
               return;
             }
-            else{
+            else {
               output.answers = rows;
 
               res.send(JSON.stringify(output));
             }
-          });        
+          });
         }
       });
     }
@@ -155,15 +151,15 @@ router.post("/profilePicture", async function (req, res) {
     else {
       newName = Date.now() + "-" + nanoid() + ".jpg"
       const storage = multer.diskStorage({
-        destination: function(req, file, cb) {
+        destination: function (req, file, cb) {
           cb(null, 'public/lib/profilePictures');
         },
-        filename: function(req, file, cb) {
+        filename: function (req, file, cb) {
           cb(null, newName);
         }
       });
 
-      const imageFilter = function(req, file, cb) {
+      const imageFilter = function (req, file, cb) {
         if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
           req.fileValidationError = 'Only image files are allowed!';
           return cb(new Error('Only image files are allowed!'), false);
@@ -173,7 +169,7 @@ router.post("/profilePicture", async function (req, res) {
 
       let upload = multer({ storage: storage, fileFilter: imageFilter }).single('profile_pic');
 
-      upload(req, res, function(err) {
+      upload(req, res, function (err) {
         if (req.fileValidationError) {
           return res.send(req.fileValidationError);
         }
@@ -191,10 +187,10 @@ router.post("/profilePicture", async function (req, res) {
       var sql = "UPDATE users SET profilepicturepath = '/" + newName + "' WHERE id = '" + id + "';"
       var params = [];
       db.all(sql, params, (err, rows) => {
-        if (err){
+        if (err) {
           res.sendStatus(400);
         }
-        else{
+        else {
           res.send("<script>window.location.href = '/profile.html?" + id + "';</script>")
         }
       });
@@ -245,12 +241,12 @@ router.post("/new_session", async (req, res) => {
 });
 
 router.get("/isLoggedIn", (req, res) => {
-  if (req.body.sessionUserId == "0"){
-    resJSON = {loggedin: "false"}
+  if (req.body.sessionUserId == "0") {
+    resJSON = { loggedin: "false" }
     res.send(resJSON)
   }
   else {
-    resJSON = {loggedin: "true", userid: req.body.sessionUserId}
+    resJSON = { loggedin: "true", userid: req.body.sessionUserId }
     res.send(resJSON)
   }
 })
